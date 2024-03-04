@@ -1,8 +1,11 @@
-using Demo_Poet.Data;
+﻿using Demo_Poet.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<Demo_PoetContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Demo_PoetContext") ?? throw new InvalidOperationException("Connection string 'Demo_PoetContext' not found.")));
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
